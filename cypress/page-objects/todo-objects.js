@@ -9,7 +9,7 @@ export class TodoPage {
 
     validateTodoText(todoIndex, expectedText) {
 
-        cy.get(` .todo-list li:nth-child(${todoIndex + 1}) lavel`).should('have.text', expectedText)
+        cy.get(` .todo-list li:nth-child(${todoIndex + 1}) label`).should('have.text', expectedText)
 
     }
 
@@ -35,6 +35,19 @@ export class TodoPage {
 
     validateAllTodo(){
         cy.get(' .todo-list li').should('have.length', 3)
+    }
 
+    validateHasLineThrough(){
+        cy.get('label').should('have.css', 'text-decoration-line', 'line-through')
+
+    }
+
+    validateHasNoDescendants(){
+        cy.get('.todo-list').should('not.have.descendants', 'li')
+
+    }
+
+    validateToggleState(todoIndex, shouldbeToggled){
+        const label = cy.get(` .todo-list li:nth-child(${todoIndex + 1 }) label`)
     }
 }
